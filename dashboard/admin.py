@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Restaurante, Usuario, ItemCardapio, Pedido, PedidoItem
+from .models import Restaurante, ItemCardapio, Pedido, PedidoItem
 
 class PedidoItemInline(admin.TabularInline):
     model = PedidoItem
@@ -13,7 +13,6 @@ class PedidoAdmin(admin.ModelAdmin):
     inlines = [PedidoItemInline]
 
 admin.site.register(Restaurante)
-admin.site.register(Usuario)
 admin.site.register(ItemCardapio)
 admin.site.register(Pedido, PedidoAdmin) # Registra o Pedido com a configuração customizada
 admin.site.register(PedidoItem)
