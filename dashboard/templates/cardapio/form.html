@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <script src='main.js'></script>
+</head>
+<body>
+  <h1>Item do Cardápio</h1>
+  <div class="form-container">
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {{ form }}
+
+          <p><input type="submit" value="CADASTRAR"></p>
+      </form>
+  </div>
+</body>
+</html>
