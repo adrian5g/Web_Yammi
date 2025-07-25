@@ -122,6 +122,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# configuraçoes de arquivos de mídia (imagens, uploads, etc)
+# Configuraçoes de arquivos de mídia (imagens, uploads, etc)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Configurando a rota do Login
+LOGIN_URL = '/dash/login'

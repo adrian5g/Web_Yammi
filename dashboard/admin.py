@@ -12,7 +12,7 @@ class PedidoAdmin(admin.ModelAdmin):
     search_fields = ('cliente_nome', 'id')
     inlines = [PedidoItemInline]
 
-admin.site.register(Restaurante)
+# admin.site.register(Restaurante)
 admin.site.register(ItemCardapio)
 admin.site.register(Pedido, PedidoAdmin) # Registra o Pedido com a configuração customizada
 admin.site.register(PedidoItem)
