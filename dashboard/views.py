@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 def home(request):
-    return render(request, 'home.html')
+    return redirect('listar_itens_cardapio') # TODO: redirecionar para outra página
 
 
 # AUTH
@@ -32,7 +32,7 @@ def registrar_restaurante(request):
     else:
         form = RestauranteCreationForm()
 
-    return render(request, 'auth/cadastro_form.html', {'form': form})
+    return render(request, 'auth/form_cadastro.html', {'form': form})
 
 
 def login_restaurante(request):
@@ -47,12 +47,30 @@ def login_restaurante(request):
         else:
             messages.error(request, 'Usuário ou senha inválidos.')
 
-    return render(request, 'auth/login_form.html')
+    return render(request, 'auth/form_login.html')
 
 
 def logout_restaurante(request):
     logout(request)
-    return redirect('login_restaurante')
+    return redirect('login')
+
+
+# CRUD
+# INFORMAÇÕES
+
+
+@login_required
+def info_home(request):
+    return render(request, 'info/home.html')
+
+
+# CRUD
+# PEDIDOS
+
+
+@login_required
+def listar_pedidos(request):
+    return render(request, 'pedidos/home.html')
 
 # CRUD
 # ITENS DO CARDAPIO

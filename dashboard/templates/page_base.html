@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+  <title>
+    {% block page_title %}
+    {% endblock %}
+  </title>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <!-- ESTILIZAÇÃO -->
+  <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/page.css' %}">
+
+  <!-- ÍCONES -->
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</head>
+<body>
+  <aside>
+    <img src="{% static 'image/logo.svg' %}" alt="Logo">
+
+    <nav>
+      {% block sidebar_options %}
+      {% endblock %}
+    </nav>
+    
+    <a class="exit" href="{% url 'logout' %}">
+      <i data-lucide="log-out"></i>
+      <p>Sair</p>
+    </a>
+  </aside>
+
+  <main>
+    {% block main_content %}
+    {% endblock %}
+  </main>
+</body>
+</html>

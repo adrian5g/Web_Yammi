@@ -1,28 +1,54 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
-  </head>
-  <body>
+{% extends "../page_base.html" %} 
+
+{% block page_title %}
+Dash - Cardápio
+{% endblock %}
+
+{% block sidebar_options %}
+<a href="{% url 'home_info' %}">
+  <i data-lucide="book-text"></i>
+  <p>Informações</p>
+</a>
+
+<a href="{% url 'listar_pedidos' %}">
+  <i data-lucide="notepad-text"></i>
+  <p>Pedidos</p>
+</a>
+
+<a href="" class="active">
+  <i data-lucide="utensils-crossed"></i>
+  <p>Cardápio</p>
+</a>
+{% endblock %} {% block main_content %}
+<div>
+  <a href="{% url 'cadastrar_item_cardapio' %}" class="create">
+    <i data-lucide="square-plus"></i>
+    <p>Adicionar item</p>
+  </a>
+</div>
+
+<div>
+  {% for item in itens_cardapio %}
+  <div>
     <div>
-      <a href="{% url 'cadastrar_item_cardapio' %}">
-        <p>Adicionar item</p>
-      </a>
+      <img src="{{ item.imagem.url }}" alt="Imagem Item Cardápio" />
+      <p>{{ item.nome }}</p>
+      <p>R$ {{ item.valor }}</p>
+      <p>{{ item.descricao }}</p>
     </div>
 
     <div>
-      {% for item in itens_cardapio %}
-      <div>
-        <img src="{{ item.imagem.url }}" alt="Imagem Item Cardápio">
-      </div>
-      {% empty %}
-      <p>Não existe nenhuma item cadastrado</p>
-      {% endfor %}
+      <a href="{% url 'remover_item_cardapio' item.id %}">
+        <i data-lucide="x"></i>
+      </a>
+
+      <a href="{% url 'editar_item_cardapio' item.id %}">
+        <i data-lucide="pencil"></i>
+      </a>
     </div>
-  </body>
-</html>
+  </div>
+  {% empty %}
+  <p>Não existe nenhum item cadastrado</p>
+  {% endfor %}
+</div>
+{% endblock %}

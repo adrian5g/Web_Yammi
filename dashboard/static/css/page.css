@@ -1,0 +1,25 @@
+:root {
+  /* Decleração das cores */
+  --orange-1: #F95E07;
+  --orange-2: #FA4A0C;
+  --red-1: #DB79A9;
+  --green-1: #9DC8A5;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.active {
+  color: var(--orange-1);
+}
+
+.create {
+  color: var(--green-1);
+}
+
+.exit {
+  color: var(--red-1);
+}
+

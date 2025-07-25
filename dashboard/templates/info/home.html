@@ -1,0 +1,40 @@
+{% extends "../page_base.html" %}
+
+{% block page_title %}
+Dash - Informações
+{% endblock %}
+
+{% block sidebar_options %}
+<a href="" class="active">
+  <i data-lucide="book-text"></i>
+  <p>Informações</p>
+</a>
+
+<a href="{% url 'listar_pedidos' %}">
+  <i data-lucide="notepad-text"></i>
+  <p>Pedidos</p>
+</a>
+
+<a href="{% url 'listar_itens_cardapio' %}">
+  <i data-lucide="utensils-crossed"></i>
+  <p>Cardápio</p>
+</a>
+{% endblock %}
+
+{% block main_content %}
+<div>
+  <a href="{% url 'cadastrar_item_cardapio' %}">
+    <p>Adicionar item</p>
+  </a>
+</div>
+
+<div>
+  {% for item in itens_cardapio %}
+  <div>
+    <img src="{{ item.imagem.url }}" alt="Imagem Item Cardápio">
+  </div>
+  {% empty %}
+  <p>Não existe nenhuma item cadastrado</p>
+  {% endfor %}
+</div>
+{% endblock %}

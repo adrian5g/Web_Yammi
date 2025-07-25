@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  
+  <title>
+    {% block page_title %}
+    {% endblock %}
+  </title>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <!-- ESTILIZAÇÃO -->
+  <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/form.css' %}">
+
+  <!-- ÍCONES -->
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</head>
+<body>
+  <div>
+    <h1>
+      {% block form_title %}
+      {% endblock %}
+    </h1>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% block inputs %}
+      {% endblock %}
+
+      <button type="submit">
+        {% block submit_text %}
+        {% endblock %}
+      </button>
+    </form>
+
+    <div>
+      {% block option_message %} {% endblock %}
+    </div>
+  </div>
+</body>
+</html>

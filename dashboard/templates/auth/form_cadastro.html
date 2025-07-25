@@ -1,0 +1,22 @@
+{% extends "../auth_form_base.html" %}
+
+{% block page_title %}
+Dash - Cadastro
+{% endblock %}
+
+{% block form_title %}
+Cadastro
+{% endblock %}
+
+{% block inputs %}
+{{ form.as_p }}
+{% endblock %}
+
+{% block option_message %}
+<p>Já tem uma conta?</p>
+<a href="{% url 'login' %}">Faça Login</a>
+{% endblock %}
+
+{% block submit_text %}
+Cadastrar-se
+{% endblock %}
