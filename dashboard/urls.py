@@ -20,18 +20,15 @@ urlpatterns = [
     path('pedidos/editar/<int:id>/', editar_pedido, name="editar_pedido"),   
     path('pedidos/remover/<int:id>/', remover_pedido, name="remover_pedido"), 
 
-
     # CRUD PedidoItem 
     path('pedidos/<int:pedido_id>/', detalhar_pedido, name="detalhar_pedido"),
     path('pedidos/<int:pedido_id>/itens/cadastrar/', cadastrar_pedido_item, name="cadastrar_pedido_item"),
     path('pedidos/<int:pedido_id>/itens/editar/<int:item_id>/', editar_pedido_item, name="editar_pedido_item"),
     path('pedidos/<int:pedido_id>/itens/remover/<int:item_id>/', remover_pedido_item, name="remover_pedido_item"),
    
-
-
     # CRUD Cardapio
     path('cardapio/', listar_itens_cardapio, name="listar_itens_cardapio"),
-    path('cardapio_cadastrar/', cadastrar_item_cardapio, name="cadastrar_item_cardapio"),
-    path('cardapio_editar/<int:id>/', editar_item_cardapio, name="editar_item_cardapio"),
-    path('cardapio_remover/<int:id>/', remover_item_cardapio, name="remover_item_cardapio"),
+    path('cardapio/cadastrar/', cadastrar_item_cardapio, name="cadastrar_item_cardapio"),
+    path('cardapio/editar/<int:id>/', editar_item_cardapio, name="editar_item_cardapio"),
+    path('cardapio/remover/<int:id>/', remover_item_cardapio, name="remover_item_cardapio"),
 ]
