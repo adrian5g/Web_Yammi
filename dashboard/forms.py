@@ -1,5 +1,4 @@
-
-from .models import Restaurante, ItemCardapio
+from .models import Restaurante, ItemCardapio, Pedido, PedidoItem
 from django import forms
 
 class RestauranteCreationForm(forms.ModelForm):
@@ -26,3 +25,20 @@ class ItemCardapioForm(forms.ModelForm):
     class Meta:
         model = ItemCardapio
         fields = ['nome', 'descricao', 'valor', 'imagem', 'imagem']
+
+
+class PedidoForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ['cliente_nome', 'cliente_endereco', 'cliente_telefone', 'status']
+
+
+
+class PedidoItemForm(forms.ModelForm):
+    class Meta:
+        model = PedidoItem
+        fields = ['item_cardapio', 'quantidade']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
