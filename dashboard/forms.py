@@ -2,13 +2,25 @@ from .models import Restaurante, ItemCardapio, Pedido, PedidoItem
 from django import forms
 
 class RestauranteCreationForm(forms.ModelForm):
-    senha = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'input-form', 'placeholder': 'Digite sua senha'})
-    )
-    confirmar_senha = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'input-form', 'placeholder': 'Confirme sua senha'})
-    )
+    senha = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Senha'}))
+    confirmar_senha = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirmar senha'}))
 
+    class Meta:
+        model = Restaurante
+        fields = ['nome', 'cnpj', 'telefone', 'imagem', 'senha', 'confirmar_senha']
+        widgets = {
+            'nome': forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'cnpj': forms.TextInput(attrs={'placeholder': 'CNPJ'}),
+            'telefone': forms.TextInput(attrs={'placeholder': 'Telefone'}),
+            'imagem': forms.ClearableFileInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-input'
+
+    
     class Meta:
         model = Restaurante
         fields = ['nome', 'cnpj', 'telefone', 'imagem', 'senha', 'confirmar_senha']

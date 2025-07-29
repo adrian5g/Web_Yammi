@@ -9,21 +9,23 @@ Login
 {% endblock %} 
 
 {% block inputs %}
-<p>
-  <label for="id_user">Usuário</label>
-  <input type="text" name="username" placeholder="Usuário" id="id_user" required /><br />
-</p>
+  <div class="form-group">
+    <label for="id_user">Usuário</label>
+    <input type="text" name="username" placeholder="Usuário" id="id_user" class="form-input" required />
+  </div>
 
-<p>
-  <label for="id_senha">Senha</label>
-  <input type="password" name="password" placeholder="Senha" id="id_senha" required /><br />
-</p>
+  <div class="form-group">
+    <label for="id_senha">Senha</label>
+    <input type="password" name="password" placeholder="Senha" id="id_senha" class="form-input" required />
+  </div>
 {% endblock %}
 
-{% block option_message %}
-<p>Ainda não possui uma conta?</p>
-<a href="{% url 'cadastro' %}">Cadastrar-se</a>
-{% endblock %} 
 {% block submit_text %}
 Entrar
 {% endblock %}
+
+{% block option_message %}
+  <p>Ainda não possui uma conta?</p>
+  <a href="{% url 'cadastro' %}">Cadastrar-se</a>
+{% endblock %}
+
