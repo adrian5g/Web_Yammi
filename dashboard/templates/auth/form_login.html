@@ -1,23 +1,15 @@
-{% extends "../auth_form_base.html" %}
+{% extends "../auth_form_base.html" %} {% block page_title %} Dash - Login {% endblock %} {% block
+form_title %} Login {% endblock %} {% block inputs %}
+<p>
+  <label for="id_user">Usuário</label>
+  <input type="text" name="username" placeholder="Usuário" id="id_user" required /><br />
+</p>
 
-{% block page_title %}
-Dash - Login
-{% endblock %}
-
-{% block form_title %}
-Login
-{% endblock %}
-
-{% block inputs %}
-<input type="text" name="username" placeholder="Usuário" required /><br />
-<input type="password" name="password" placeholder="Senha" required /><br />
-{% endblock %}
-
-{% block option_message %}
+<p>
+  <label for="id_senha"></label>
+  <input type="password" name="password" placeholder="Senha" id="id_senha" required /><br />
+</p>
+{% endblock %} {% block option_message %}
 <p>Ainda não possui uma conta?</p>
 <a href="{% url 'cadastro' %}">Cadastrar-se</a>
-{% endblock %}
-
-{% block submit_text %}
-Entrar
-{% endblock %}
+{% endblock %} {% block submit_text %} Entrar {% endblock %}
