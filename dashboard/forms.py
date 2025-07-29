@@ -2,8 +2,12 @@ from .models import Restaurante, ItemCardapio, Pedido, PedidoItem
 from django import forms
 
 class RestauranteCreationForm(forms.ModelForm):
-    senha = forms.CharField(widget=forms.PasswordInput())
-    confirmar_senha = forms.CharField(widget=forms.PasswordInput())
+    senha = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'input-form', 'placeholder': 'Digite sua senha'})
+    )
+    confirmar_senha = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'input-form', 'placeholder': 'Confirme sua senha'})
+    )
 
     class Meta:
         model = Restaurante

@@ -2,6 +2,52 @@
   /* Decleração das cores */
   --orange-1: #F95E07;
   --orange-2: #FA4A0C;
+  --white: #ffff;
 }
 
+body{
+  background-color: var(--orange-1);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
+.all{
+  margin: 0 auto;
+  background-color: var(--white);
+  width: 30%;
+  padding-bottom: 150px;
+  padding-top: 20px;
+  border-radius: 10px;
+  align-items: center;
+  text-align: center;
+  margin-top: 5%;
+}
+
+button[type="submit"]{
+  background-color: var(--orange-2);
+  border: none;
+  font-weight: bold;
+  color: var(--white); 
+  border-radius: 8px;
+  width: 50%;
+  padding: 3%;
+  margin-top: 3%;
+  text-decoration: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+  font-size: 16px;
+  padding: 10px;
+  width: 50%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+a{
+  text-decoration: none;
+}

@@ -24,27 +24,32 @@
   </script>
 </head>
 <body>
-  <div>
+  
+  <div class="all">
+
     <h1>
       {% block form_title %}
       {% endblock %}
     </h1>
-
+    
+    <div class="test">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
 
       {% block inputs %}
       {% endblock %}
-
+    </div>
       <button type="submit">
         {% block submit_text %}
         {% endblock %}
       </button>
+   
     </form>
 
     <div>
       {% block option_message %} {% endblock %}
-    </div>
+    </div> 
+
   </div>
 </body>
 </html>
