@@ -1,7 +1,7 @@
 from django.urls import path
 
 
-from .views import home, registrar_restaurante, login_restaurante, logout_restaurante, listar_itens_cardapio, cadastrar_item_cardapio, editar_item_cardapio, remover_item_cardapio, listar_pedidos, cadastrar_pedido, editar_pedido, remover_pedido, info_home, detalhar_pedido, cadastrar_pedido_item, editar_pedido_item,remover_pedido_item
+from .views import home, registrar_restaurante, login_restaurante, logout_restaurante, listar_itens_cardapio, cadastrar_item_cardapio, editar_item_cardapio, remover_item_cardapio, listar_pedidos, cadastrar_pedido, editar_pedido, remover_pedido, info_home, detalhar_pedido, cadastrar_pedido_item, editar_pedido_item,remover_pedido_item, editar_informacoes, restaurante_info
 
 urlpatterns = [
     path('', home),
@@ -13,6 +13,8 @@ urlpatterns = [
 
     # CRUD informações
     path('info/', info_home, name="home_info"),
+    path('info/editar/', editar_informacoes, name='editar_informacoes'),
+    path('info_restaurante/', restaurante_info, name='restaurante_info'),
 
     # CRUD pedidos
     path('pedidos/', listar_pedidos, name="listar_pedidos"),

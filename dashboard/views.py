@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404 
-from .forms import ItemCardapioForm, RestauranteCreationForm, PedidoForm, PedidoItemForm
+from .forms import ItemCardapioForm, RestauranteCreationForm, PedidoForm, PedidoItemForm, RestauranteEditForm
 from .models import ItemCardapio, Restaurante, Pedido, PedidoItem
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -310,3 +310,17 @@ def remover_pedido_item(request, pedido_id, item_id):
     
     messages.warning(request, 'Confirme a remoção do item do pedido.')
     return redirect('detalhar_pedido', pedido_id=pedido.id)
+
+def editar_informacoes(request):
+    restaurante = Restaurante.objects.get(user=request.user)
+    form = RestauranteEditForm(request.POST or None, request.FILES or None, instance=restaurante)
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'informações atualizadas com sucesso!')
+        return redirect('home_info')
+    return render(request, 'info/form_info.html', {'form':form})
+
+def restaurante_info(request):
+    restaurante = Restaurante.objects.get(user=request.user)
+    return render(request, 'info/restaurante_info.html', {'restaurante': restaurante})

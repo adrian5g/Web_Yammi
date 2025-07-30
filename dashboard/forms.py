@@ -57,4 +57,21 @@ class PedidoItemForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
+
+class RestauranteEditForm(forms.ModelForm):
+    class Meta:
+        model = Restaurante
+        fields = ['nome', 'cnpj', 'telefone', 'imagem']
+
+        widgets = {
+            'nome': forms.TextInput(attrs={'placeholder':'Nome'}),
+            'cnpj': forms.TextInput(attrs={'placeholder':'CNPJ'}),
+            'telefone': forms.TextInput(attrs={'placeholder':'Telefone'}),
+            'imagem': forms.ClearableFileInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-input'

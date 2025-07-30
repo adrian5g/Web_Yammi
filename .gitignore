@@ -1,0 +1,16 @@
+# Ignorar arquivos de cache do Python
+__pycache__/
+*.py[cod]
+
+# Ignorar o banco de dados local
+db.sqlite3
+
+# Ignorar ambiente virtual
+venv/
+
+# Ignorar arquivos temporários do editor
+*.swp
+*.swo
+
+# Ignorar configurações do VS Code (se usar)
+.vscode/
