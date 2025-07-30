@@ -14,3 +14,4 @@ venv/
 
 # Ignorar configurações do VS Code (se usar)
 .vscode/
+"db.sqlite3" 

@@ -27,28 +27,26 @@ Dash - Cardápio
   </a>
 </div>
 
-<div>
+<div class="cards-container">
   {% for item in itens_cardapio %}
-  <div>
-    <div>
+    <div class="menu-item">
       <img src="{{ item.imagem.url }}" alt="Imagem Item Cardápio" />
-      <p>{{ item.nome }}</p>
-      <p>R$ {{ item.valor }}</p>
-      <p>{{ item.descricao }}</p>
+      <div class="menu-info">
+        <h4>{{ item.nome }}</h4>
+        <p class="preco">R$ {{ item.valor }}</p>
+        <p class="descricao">{{ item.descricao }}</p>
+        <div class="menu-actions">
+          <a href="{% url 'editar_item_cardapio' item.id %}" class="edit">
+            <i data-lucide="pencil"></i>
+          </a>
+          <a href="{% url 'remover_item_cardapio' item.id %}" class="delete">
+            <i data-lucide="x"></i>
+          </a>
+        </div>
+      </div>
     </div>
-
-    <div>
-      <a href="{% url 'remover_item_cardapio' item.id %}">
-        <i data-lucide="x"></i>
-      </a>
-
-      <a href="{% url 'editar_item_cardapio' item.id %}">
-        <i data-lucide="pencil"></i>
-      </a>
-    </div>
-  </div>
   {% empty %}
-  <p>Não existe nenhum item cadastrado</p>
+    <p>Não existe nenhum item cadastrado</p>
   {% endfor %}
 </div>
 {% endblock %}
