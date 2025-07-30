@@ -24,23 +24,20 @@ Dash - Informações
 {% block main_content %}
 <div>
   <a href="{% url 'editar_informacoes' %}">
-    <p>editar</p>
+    <p>Editar</p>
   </a>
 </div>
 
-<div>
-  <a href="{% url 'restaurante_info' %}">
-    <p>ver informacoes</p>
-  </a>
-</div>
 
-<div>
-  {% for item in itens_cardapio %}
-  <div>
-    <img src="{{ item.imagem.url }}" alt="Imagem Item Cardápio">
-  </div>
-  {% empty %}
-  <p>Não existe nenhuma item cadastrado</p>
-  {% endfor %}
+
+<div class="info-box">
+  <p><strong>Nome:</strong> {{ restaurante.nome }}</p>
+  <p><strong>CNPJ:</strong> {{ restaurante.cnpj }}</p>
+  <p><strong>Endereço:</strong> {{ restaurante.endereco }}</p>
+  <p><strong>Telefone:</strong> {{ restaurante.telefone }}</p>
+  {% if restaurante.imagem %}
+    <p><strong>Imagem:</strong><br>
+    <img src="{{ restaurante.imagem.url }}" alt="Imagem do restaurante" width="200"></p>
+  {% endif %}
 </div>
 {% endblock %}

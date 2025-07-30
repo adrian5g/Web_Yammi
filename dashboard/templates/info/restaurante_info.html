@@ -2,14 +2,5 @@
 
 {% block page_title %}Informações do Restaurante{% endblock %}
 
-<div class="info-box">
-  <p><strong>Nome:</strong> {{ restaurante.nome }}</p>
-  <p><strong>CNPJ:</strong> {{ restaurante.cnpj }}</p>
-  <p><strong>Endereço:</strong> {{ restaurante.endereco }}</p>
-  <p><strong>Telefone:</strong> {{ restaurante.telefone }}</p>
-  {% if restaurante.imagem %}
-    <p><strong>Imagem:</strong><br>
-    <img src="{{ restaurante.imagem.url }}" alt="Imagem do restaurante" width="200"></p>
-  {% endif %}
-</div>
+
 
