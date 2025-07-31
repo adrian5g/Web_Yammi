@@ -14,7 +14,6 @@
 }
 
 body {
-  overflow: hidden;
   background-color: var(--gray-1);
 }
 
@@ -50,9 +49,9 @@ body {
 .form-container {
   background-color: var(--white);
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  margin-block: 10dvh;
+  transform: translate(-50%);
   width: 700px;
   display: flex;
   flex-direction: column;
@@ -100,5 +99,6 @@ form {
 @media screen and (width < 880px) {
   .form-container {
     max-width: 60dvw;
+    margin-block: 10dvh;
   }
 }
