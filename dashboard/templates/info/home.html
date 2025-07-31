@@ -23,8 +23,7 @@ Dash - Informações
 
 {% block main_content %}
 <div class="info-box">
-
- {% if restaurante.imagem %}
+  {% if restaurante.imagem %}
     <p class="img-info"><strong></strong><br>
     <img src="{{ restaurante.imagem.url }}" alt="Imagem do restaurante" width="400"></p>
   {% endif %}
@@ -33,13 +32,11 @@ Dash - Informações
   <p><strong>CNPJ:</strong> {{ restaurante.cnpj }}</p>
   <p><strong>Endereço:</strong> {{ restaurante.endereco }}</p>
   <p><strong>Telefone:</strong> {{ restaurante.telefone }}</p>
- 
-
-
-<div class="editinfo">
-  <a href="{% url 'editar_informacoes' %}">
-    <p>Editar</p>
-  </a>
-</div>
+  
+  <div class="editinfo">
+    <a href="{% url 'editar_informacoes' %}">
+      <p>Editar</p>
+    </a>
+  </div>
 </div>
 {% endblock %}
