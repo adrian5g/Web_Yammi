@@ -1,8 +1,7 @@
 {% extends 'page_base.html' %}
-{% load static %}
 
-{% block title %}
-    Pedidos
+{% block page_title %}
+Pedidos
 {% endblock %}
 
 {% block sidebar_options %}
@@ -25,14 +24,6 @@
 {% block main_content %} 
 <div class="container my-4">
     <h2>Lista de Pedidos</h2>
-
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
 
     <div class="mb-3">
         <a href="{% url 'cadastrar_pedido' %}" class="btn btn-primary">Cadastrar Novo Pedido</a>

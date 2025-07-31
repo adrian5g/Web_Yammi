@@ -15,7 +15,6 @@ urlpatterns = [
     path('info/', info_home, name="home_info"),
     path('info/editar/', editar_informacoes, name='editar_informacoes'),
 
-
     # CRUD pedidos
     path('pedidos/', listar_pedidos, name="listar_pedidos"),
     path('pedidos/cadastrar/', cadastrar_pedido, name="cadastrar_pedido"), 
