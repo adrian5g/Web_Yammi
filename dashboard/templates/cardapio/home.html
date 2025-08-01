@@ -19,9 +19,11 @@ Cardápio
   <i data-lucide="utensils-crossed"></i>
   <p>Cardápio</p>
 </a>
-{% endblock %} {% block main_content %}
+{% endblock %} 
+
+{% block main_content %}
 <div>
-  <a href="{% url 'cadastrar_item_cardapio' %}" class="create">
+  <a href="{% url 'cadastrar_item_cardapio' %}" class="border-button" >
     <i data-lucide="square-plus"></i>
     <p>Adicionar item</p>
   </a>
@@ -46,7 +48,7 @@ Cardápio
       </div>
     </div>
   {% empty %}
-    <p>Não existe nenhum item cadastrado</p>
+    <p>Nenhum item encontrado para o seu restaurante.</p>
   {% endfor %}
 </div>
 {% endblock %}

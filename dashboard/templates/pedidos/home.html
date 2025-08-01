@@ -23,10 +23,11 @@ Pedidos
 
 {% block main_content %} 
 <div class="container my-4">
-    <h2>Lista de Pedidos</h2>
-
     <div class="mb-3">
-        <a href="{% url 'cadastrar_pedido' %}" class="btn btn-primary">Cadastrar Novo Pedido</a>
+        <a href="{% url 'cadastrar_item_cardapio' %}" class="border-button">
+            <i data-lucide="square-plus"></i>
+            <p>Adicionar pedido</p>
+        </a>
     </div>
 
     <div class="pedidos-container">

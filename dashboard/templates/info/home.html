@@ -22,21 +22,23 @@ Informações
 {% endblock %}
 
 {% block main_content %}
-<div class="info-box">
+<div class="information-container">
   {% if restaurante.imagem %}
-    <p class="img-info"><strong></strong><br>
-    <img src="{{ restaurante.imagem.url }}" alt="Imagem do restaurante" width="400"></p>
+  <img src="{{ restaurante.imagem.url }}" alt="Imagem do restaurante" width="400">
   {% endif %}
 
-  <p><strong>Nome:</strong> {{ restaurante.nome }}</p>
+  <h2>{{ restaurante.nome }}</h2>
   <p><strong>CNPJ:</strong> {{ restaurante.cnpj }}</p>
-  <p><strong>Endereço:</strong> {{ restaurante.endereco }}</p>
+  <!-- <p><strong>Endereço:</strong> {{ restaurante.endereco }}</p> -->
   <p><strong>Telefone:</strong> {{ restaurante.telefone }}</p>
-  
-  <div class="editinfo">
-    <a href="{% url 'editar_informacoes' %}">
-      <p>Editar</p>
-    </a>
-  </div>
+
+  <a 
+    href="{% url 'editar_informacoes' %}" 
+    class="border-button"
+    style="width: auto;"
+  >
+    <i data-lucide="square-pen"></i>
+    <p>Editar informações</p>
+  </a>
 </div>
 {% endblock %}

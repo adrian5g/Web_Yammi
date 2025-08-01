@@ -28,24 +28,23 @@
   </script>
 </head>
 <body>
-  <aside class="nav">
+  <aside class="sidebar">
     <img src="{% static 'image/logo.svg' %}" alt="Logo">
-      <nav>
-        {% block sidebar_options %}
-        {% endblock %}
-      </nav>
-      
-      <a class="exit" href="{% url 'logout' %}">
-        <i data-lucide="log-out"></i>
-        <p>Sair</p>
-      </a>
+    
+    <nav>
+      {% block sidebar_options %}
+      {% endblock %}
+    </nav>
+    
+    <a class="exit" href="{% url 'logout' %}">
+      <i data-lucide="log-out"></i>
+      <p>Sair</p>
+    </a>
   </aside>
 
-  <main>
-   
-      {% block main_content %}
-      {% endblock %}
-    </div>
+  <main class="main-container">
+    {% block main_content %}
+    {% endblock %}
   </main>
 </body>
 </html>
