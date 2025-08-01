@@ -22,15 +22,13 @@ Pedidos
 {% endblock %}
 
 {% block main_content %} 
-<div class="container my-4">
-    <div class="mb-3">
-        <a href="{% url 'cadastrar_pedido' %}" class="border-button">
-            <i data-lucide="square-plus"></i>
-            <p>Adicionar pedido</p>
-        </a>
-    </div>
+<div class="pedidos-container">
+    <a href="{% url 'cadastrar_pedido' %}" class="border-button">
+        <i data-lucide="square-plus"></i>
+        <p>Adicionar pedido</p>
+    </a>
 
-    <div class="pedidos-container">
+    <div class="pedidos-cards">
         {% if pedidos %}
             {% for pedido in pedidos %}
                 <div class="pedido-card">
@@ -41,7 +39,7 @@ Pedidos
                         <p><strong>Telefone:</strong> {{ pedido.cliente_telefone }}</p>
                         <p><strong>Status:</strong> {{ pedido.get_status_display }}</p>
                     </div>
-
+    
                     <div class="pedido-itens">
                         {% for item in pedido.itens.all %}
                             <div class="pedido-item">
@@ -59,9 +57,10 @@ Pedidos
                             </div>
                         {% endfor %}
                     </div>
-
+    
                     <div class="pedido-actions">
                         <a href="{% url 'editar_pedido' pedido.id %}" class="btn btn-edit">Editar</a>
+                        <a href="{% url 'cadastrar_pedido_item' pedido.id %}" class="btn btn-edit">Adicionar</a>
                         <a href="{% url 'remover_pedido' pedido.id %}" class="btn btn-edit">Remover</a>
                     </div>
                 </div>

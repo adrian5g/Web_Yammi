@@ -1,93 +1,33 @@
-{% extends 'page_base.html' %}
-{% load static %}
-
-{% block title %}
-    Detalhes do Pedido #{{ pedido.id }}
-{% endblock %}
-
-{% block sidebar_options %}
-<a href="{% url 'home_info' %}">
- <i data-lucide="book-text"></i>
- <p>Informações</p>
-</a>
-
-<a href="{% url 'listar_pedidos' %}" class="active">
- <i data-lucide="notepad-text"></i>
- <p>Pedidos</p>
-</a>
-
-<a href="{% url 'listar_itens_cardapio' %}">
- <i data-lucide="utensils-crossed"></i>
- <p>Cardápio</p>
-</a>
-{% endblock %}
-
-{% block main_content %}
-    <div class="container my-4">
-        <h2>Detalhes do Pedido #{{ pedido.id }}</h2>
-
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
-        <div class="card mb-4">
-            <div class="card-header">
-                Informações do Pedido
-            </div>
-            <div class="card-body">
-                <p><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
-                <p><strong>Endereço:</strong> {{ pedido.cliente_endereco }}</p>
-                <p><strong>Telefone:</strong> {{ pedido.cliente_telefone }}</p>
-                <p><strong>Data/Hora:</strong> {{ pedido.data_hora|date:"d/m/Y H:i" }}</p>
-                <p><strong>Status:</strong> {{ pedido.get_status_display }}</p>
-                <a href="{% url 'editar_pedido' pedido.id %}" class="btn btn-sm btn-info">Editar Pedido</a>
-                <form action="{% url 'remover_pedido' pedido.id %}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja remover este pedido e todos os seus itens?');">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-danger">Remover Pedido</button>
-                </form>
-                <a href="{% url 'listar_pedidos' %}" class="btn btn-sm btn-secondary">Voltar para Pedidos</a>
-            </div>
-        </div>
-
-        <h3>Itens do Pedido</h3>
-        <div class="mb-3">
-            <a href="{% url 'cadastrar_pedido_item' pedido.id %}" class="btn btn-primary">Adicionar Novo Item ao Pedido</a>
-        </div>
-
-        {% if itens_pedido %}
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Item Cardápio</th>
-                            <th>Quantidade</th>
-                            <th>Valor Unitário</th>
-                            <th>Valor Total</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in itens_pedido %}
-                            <tr>
-                                <td>{{ item.item_cardapio.nome }}</td>
-                                <td>{{ item.quantidade }}</td>
-                                <td>R$ {{ item.valor_unitario|floatformat:2 }}</td>
-                                <td>R$ {{ item.valor_total|floatformat:2 }}</td>
-                                <td>
-                                    <a href="{% url 'editar_pedido_item' pedido.id item.id %}" class="btn btn-sm btn-info">Editar</a>
-                                    <a href="{% url 'remover_pedido' pedido.id item.id %}" class="btn btn-sm btn-info">Remover</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% else %}
-            <p>Este pedido não possui itens cadastrados.</p>
-        {% endif %}
+<div class="pedido-card">
+    <div class="pedido-header">
+        <h3>Pedido #{{ pedido.id }}</h3>
+        <p><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
+        <p><strong>Endereço:</strong> {{ pedido.cliente_endereco }}</p>
+        <p><strong>Telefone:</strong> {{ pedido.cliente_telefone }}</p>
+        <p><strong>Status:</strong> {{ pedido.get_status_display }}</p>
     </div>
-{% endblock main_content %}
+
+    <div class="pedido-itens">
+        {% for item in pedido.itens.all %}
+            <div class="pedido-item">
+                <div class="pedido-item-info">
+                    <img src="{{ item.imagem.url }}" alt="{{ item.nome }}">
+                    <div class="pedido-item-texto">
+                        <strong>{{ item.nome }}</strong>
+                        <span>{{ item.descricao }}</span>
+                    </div>
+                </div>
+                <span class="preco">R$ {{ item.valor }}</span>
+                <a href="{% url 'remover_item_cardapio' item.id %}">
+                    <i data-lucide="x"></i>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="pedido-actions">
+        <a href="{% url 'editar_pedido' pedido.id %}" class="btn btn-edit">Editar</a>
+        <a href="{% url 'cadastrar_pedido_item' pedido.id %}" class="btn btn-edit">Adicionar</a>
+        <a href="{% url 'remover_pedido' pedido.id %}" class="btn btn-edit">Remover</a>
+    </div>
+</div>

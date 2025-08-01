@@ -3,8 +3,7 @@
   --orange-1: #f95e07;
   --orange-2: #fa4a0c;
   
-  --white: #FDFDFD;
-
+  --gray-0: #F5F5F6;
   --gray-1: #dddde2;
   --gray-2: #EFEFEF;
 
@@ -47,7 +46,7 @@ body {
 }
 
 .form-container {
-  background-color: var(--white);
+  background-color: var(--gray-0);
   position: absolute;
   left: 50%;
   margin-block: 10dvh;

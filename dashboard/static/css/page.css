@@ -4,7 +4,7 @@
   --orange-2: #fa4a0c;
   --red-1: #db79a9;
   --green-1: #9dc8a5;
-  --withe: #fdfdfd;
+  --gray-0: #F5F5F6;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 }
 
 .sidebar {
-  background-color: var(--withe);
+  background-color: var(--gray-0);
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -55,12 +55,13 @@ body {
 }
 
 .main-container {
-  background-color: var(--withe);
+  background-color: var(--gray-0);
   display: flex;
   flex-direction: column;
   border-radius: 20px;
   flex: 1;
   margin: 20px;
+  margin-left: 60px;
   padding: 8px;
 }
 
@@ -74,4 +75,11 @@ body {
 .information-container img {
   border-radius: 100%;
   width: 200px;
+}
+
+.pedidos-container {
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }

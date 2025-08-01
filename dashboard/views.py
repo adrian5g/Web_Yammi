@@ -259,12 +259,13 @@ def cadastrar_pedido_item(request, pedido_id):
         pedido_item.valor_unitario = pedido_item.item_cardapio.valor
         pedido_item.save()
         messages.success(request, 'Item adicionado ao pedido com sucesso!')
-        return redirect('detalhar_pedido', pedido_id=pedido.id)
+        return redirect('listar_pedidos')
 
     contexto = {
         'form': form,
         'pedido': pedido
     }
+
     return render(request, 'pedidos/item_form.html', contexto)
 
 
