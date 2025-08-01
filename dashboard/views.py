@@ -136,18 +136,13 @@ def remover_pedido(request, id):
     restaurante = get_object_or_404(Restaurante, user=request.user)
     pedido = get_object_or_404(Pedido, pk=id)
 
-    # Verifica se o pedido pertence ao restaurante logado
     if pedido.restaurante != restaurante:
         messages.error(request, 'Você não tem permissão para remover este pedido.')
         return redirect('listar_pedidos')
 
-    if request.method == 'POST': 
-        pedido.delete()
-        messages.success(request, 'Pedido removido com sucesso!')
-        return redirect('listar_pedidos')
-    messages.warning(request, 'Confirme a remoção do pedido.')
-    return redirect('listar_pedidos')
+    pedido.delete()
 
+    return redirect('listar_pedidos')
 
 # CRUD
 # ITENS DO CARDAPIO
@@ -209,7 +204,6 @@ def editar_item_cardapio(request, id):
 
 @login_required
 def remover_item_cardapio(request, id):
-
     item_cardapio = get_object_or_404(ItemCardapio, pk=id)
     restaurante = get_object_or_404(Restaurante, user=request.user)
 

@@ -7,18 +7,18 @@
 
 {% block sidebar_options %}
 <a href="{% url 'home_info' %}">
-  <i data-lucide="book-text"></i>
-  <p>Informações</p>
+ <i data-lucide="book-text"></i>
+ <p>Informações</p>
 </a>
 
 <a href="{% url 'listar_pedidos' %}" class="active">
-  <i data-lucide="notepad-text"></i>
-  <p>Pedidos</p>
+ <i data-lucide="notepad-text"></i>
+ <p>Pedidos</p>
 </a>
 
 <a href="{% url 'listar_itens_cardapio' %}">
-  <i data-lucide="utensils-crossed"></i>
-  <p>Cardápio</p>
+ <i data-lucide="utensils-crossed"></i>
+ <p>Cardápio</p>
 </a>
 {% endblock %}
 
@@ -79,10 +79,7 @@
                                 <td>R$ {{ item.valor_total|floatformat:2 }}</td>
                                 <td>
                                     <a href="{% url 'editar_pedido_item' pedido.id item.id %}" class="btn btn-sm btn-info">Editar</a>
-                                    <form action="{% url 'remover_pedido_item' pedido.id item.id %}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja remover este item do pedido?');">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-sm btn-danger">Remover</button>
-                                    </form>
+                                    <a href="{% url 'remover_pedido' pedido.id item.id %}" class="btn btn-sm btn-info">Remover</a>
                                 </td>
                             </tr>
                         {% endfor %}

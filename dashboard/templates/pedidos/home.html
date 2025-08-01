@@ -24,7 +24,7 @@ Pedidos
 {% block main_content %} 
 <div class="container my-4">
     <div class="mb-3">
-        <a href="{% url 'cadastrar_item_cardapio' %}" class="border-button">
+        <a href="{% url 'cadastrar_pedido' %}" class="border-button">
             <i data-lucide="square-plus"></i>
             <p>Adicionar pedido</p>
         </a>
@@ -62,10 +62,7 @@ Pedidos
 
                     <div class="pedido-actions">
                         <a href="{% url 'editar_pedido' pedido.id %}" class="btn btn-edit">Editar</a>
-                        <form action="{% url 'remover_pedido' pedido.id %}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja remover este pedido?');">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-cancel">Cancelar</button>
-                        </form>
+                        <a href="{% url 'remover_pedido' pedido.id %}" class="btn btn-edit">Remover</a>
                     </div>
                 </div>
             {% endfor %}

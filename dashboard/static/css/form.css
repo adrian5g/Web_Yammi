@@ -71,6 +71,7 @@ form {
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .form-group label {
@@ -88,6 +89,14 @@ form {
   box-sizing: border-box;
   background-color: var(--gray-2);
   outline: none;
+}
+
+.toggle-password-button {
+  width: 2rem;
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
 }
 
 .option-text {

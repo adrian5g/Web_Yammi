@@ -25,6 +25,44 @@
       lucide.createIcons();
     });
   </script>
+
+  <script defer>
+    document.addEventListener("DOMContentLoaded", function () {
+      const inputs = [
+        document.getElementById("id_senha"),
+        document.getElementById("id_confirmar_senha")
+      ]
+
+      const eyeUrl = "{% static 'image/eye.svg' %}"
+      const eyeOffUrl = "{% static 'image/eye-off.svg' %}"
+
+      inputs.forEach(input => {
+        if (input) {
+          addToInput(input)
+          input.style.paddingRight = "45px"
+        }
+      })
+      
+      function addToInput(input) {
+        const toggleIcon = document.createElement("img");
+        toggleIcon.src = eyeUrl;
+        toggleIcon.alt = "Mostrar senha";
+        toggleIcon.className = "toggle-password-button";
+
+        toggleIcon.addEventListener("click", function () {
+          if (input.type === "password") {
+            input.type = "text";
+            toggleIcon.src = eyeOffUrl;
+          } else {
+            input.type = "password";
+            toggleIcon.src = eyeUrl;
+          }
+        });
+
+        input.parentElement.appendChild(toggleIcon);
+      }
+    });
+  </script>
 </head>
 <body>
   <div class="ball ball-1"></div>
