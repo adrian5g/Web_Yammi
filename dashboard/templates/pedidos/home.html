@@ -5,26 +5,22 @@ Pedidos
 {% endblock %}
 
 {% block main_content %}
-<div class="pedidos-container">
-  <a href="{% url 'cadastrar_pedido' %}" class="border-button">
-    <i data-lucide="square-plus"></i>
-    <p>Adicionar pedido</p>
-  </a>
+<a href="{% url 'cadastrar_pedido' %}" class="border-button">
+  <i data-lucide="square-plus"></i>
+  <p>Adicionar pedido</p>
+</a>
 
-  <div class="pedidos-cards">
-    {% if pedidos %} 
-        {% for pedido in pedidos %}
-            <a href="{% url 'detalhar_pedido' pedido.id %}" class="pedido-card">
-                <h3>Pedido #{{ pedido.id }}</h3>
-                <p><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
-                <p><strong>Endereço:</strong> {{ pedido.cliente_endereco }}</p>
-                <p><strong>Telefone:</strong> {{ pedido.cliente_telefone }}</p>
-                <p><strong>Status:</strong> {{ pedido.get_status_display }}</p>
-            </a>
-        {% endfor %} 
-    {% else %}
-        <p>Nenhum pedido encontrado para o seu restaurante.</p>
-    {% endif %}
-  </div>
+<div class="pedidos-cards">
+  {% if pedidos %} {% for pedido in pedidos %}
+  <a href="{% url 'detalhar_pedido' pedido.id %}" class="pedido-card">
+    <h3>Pedido #{{ pedido.id }}</h3>
+    <p><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
+    <p><strong>Endereço:</strong> {{ pedido.cliente_endereco }}</p>
+    <p><strong>Telefone:</strong> {{ pedido.cliente_telefone }}</p>
+    <p><strong>Status:</strong> {{ pedido.get_status_display }}</p>
+  </a>
+  {% endfor %} {% else %}
+  <p>Nenhum pedido encontrado para o seu restaurante.</p>
+  {% endif %}
 </div>
 {% endblock main_content %}

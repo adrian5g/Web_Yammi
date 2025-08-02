@@ -12,23 +12,39 @@ Cardápio
   </a>
 </div>
 
-<div class="cards-container">
+<div class="cardapio-items">
   {% for item in itens_cardapio %}
-    <div class="menu-item">
-      <img src="{{ item.imagem.url }}" alt="Imagem Item Cardápio" />
-      <div class="menu-info">
-        <h4>{{ item.nome }}</h4>
-        <p class="preco">R$ {{ item.valor }}</p>
+    <div class="cardapio-item">
+      <div class="cardapio-item-content">
+        <img src="{{ item.imagem.url }}" alt="Imagem Item Cardápio" />
+
+        <div class="cardapio-item-info">
+          <h4>{{ item.nome }}</h4>
+          <p class="preco">R$ {{ item.valor }}</p>
+        </div>
+      </div>
+
+      <div>
         <p class="descricao">{{ item.descricao }}</p>
-        <div class="menu-actions">
-          <a href="{% url 'editar_item_cardapio' item.id %}" class="edit">
+      </div>
+
+      <div class="cardapio-item-actions">
+          <a 
+            href="{% url 'editar_item_cardapio' item.id %}"
+            class="border-button squared"
+            style="--button-color: var(--blue-1);"
+          >
             <i data-lucide="pencil"></i>
           </a>
-          <a href="{% url 'remover_item_cardapio' item.id %}" class="delete">
+
+          <a 
+            href="{% url 'remover_item_cardapio' item.id %}" 
+            class="border-button squared" 
+            style="--button-color: var(--red-1);"
+          >
             <i data-lucide="x"></i>
           </a>
         </div>
-      </div>
     </div>
   {% empty %}
     <p>Nenhum item encontrado para o seu restaurante.</p>
