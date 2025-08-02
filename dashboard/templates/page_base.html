@@ -28,12 +28,24 @@
   </script>
 </head>
 <body>
-  <aside class="sidebar">
+  <aside class="sidebar colapsed">
     <img src="{% static 'image/logo.svg' %}" alt="Logo">
     
     <nav>
-      {% block sidebar_options %}
-      {% endblock %}
+      <a href="{% url 'home_info' %}" class="{% if current_url == 'home_info' %}active{% endif %}">
+        <i data-lucide="book-text"></i>
+        <p>Informações</p>
+      </a>
+
+      <a href="{% url 'listar_pedidos' %}" class="{% if current_url == 'listar_pedidos' %}active{% endif %}">
+        <i data-lucide="notepad-text"></i>
+        <p>Pedidos</p>
+      </a>
+
+      <a href="{% url 'listar_itens_cardapio' %}" class="{% if current_url == 'listar_itens_cardapio' %}active{% endif %}">
+        <i data-lucide="utensils-crossed"></i>
+        <p>Cardápio</p>
+      </a>
     </nav>
     
     <a class="exit" href="{% url 'logout' %}">

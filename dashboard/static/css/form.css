@@ -13,11 +13,14 @@
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   background-color: var(--gray-1);
 }
 
 .ball {
-  position: absolute;
+  position: fixed;
   width: 20rem;
   height: 20rem;
 
@@ -47,12 +50,9 @@ body {
 
 .form-container {
   background-color: var(--gray-0);
-  position: absolute;
-  left: 50%;
-  margin-block: 10dvh;
-  transform: translate(-50%);
   width: 700px;
   display: flex;
+  margin-block: 10rem;
   flex-direction: column;
   border-radius: 20px;
   padding-inline: 2.5rem;
@@ -91,11 +91,11 @@ form {
 }
 
 .toggle-password-button {
-  width: 2rem;
+  width: 1.5rem;
   cursor: pointer;
   position: absolute;
-  right: 5px;
-  bottom: 5px;
+  right: 12px;
+  bottom: 10px;
 }
 
 .option-text {

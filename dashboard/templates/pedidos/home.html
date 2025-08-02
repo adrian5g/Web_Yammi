@@ -4,23 +4,6 @@
 Pedidos
 {% endblock %}
 
-{% block sidebar_options %}
-<a href="{% url 'home_info' %}">
- <i data-lucide="book-text"></i>
- <p>Informações</p>
-</a>
-
-<a href="{% url 'listar_pedidos' %}" class="active">
- <i data-lucide="notepad-text"></i>
- <p>Pedidos</p>
-</a>
-
-<a href="{% url 'listar_itens_cardapio' %}">
- <i data-lucide="utensils-crossed"></i>
- <p>Cardápio</p>
-</a>
-{% endblock %}
-
 {% block main_content %} 
 <div class="pedidos-container">
     <a href="{% url 'cadastrar_pedido' %}" class="border-button">
