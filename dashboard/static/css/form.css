@@ -57,6 +57,7 @@ body {
   border-radius: 20px;
   padding-inline: 2.5rem;
   padding-block: 4rem;
+  gap: 1rem;
 }
 
 form {
