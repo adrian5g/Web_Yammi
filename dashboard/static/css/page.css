@@ -16,6 +16,7 @@ body {
 }
 
 .sidebar {
+  position: relative;
   background-color: var(--gray-0);
   display: flex;
   flex-direction: column;
@@ -56,7 +57,7 @@ body {
 }
 
 .sidebar.colapsed {
-  width: max-content;
+  width: 4rem;
   align-items: center;
 }
 
@@ -67,6 +68,34 @@ body {
 .sidebar.colapsed nav a p,
 .sidebar.colapsed > .exit > p {
   display: none;
+}
+
+.sidebar .toggle-colapse {
+  --size: 40px;
+
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  transform: translate(0, -50%) rotate(0deg);
+  transition: transform 0.3s ease;
+  transform-origin: center;
+
+  width: var(--size);
+  height: var(--size);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.sidebar.colapsed .toggle-colapse {
+  right: 50%;
+  transform: translate(50%, -50%) rotate(180deg);
+  color: white;
+  background-color: var(--orange-1);
+  border-radius: 100%;
 }
 
 .main-container {

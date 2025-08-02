@@ -26,9 +26,29 @@
       lucide.createIcons();
     });
   </script>
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebar = document.querySelector(".sidebar");
+      const toggle = document.querySelector(".toggle-colapse");
+
+      // Restaurar o estado da sidebar ao carregar a página
+      if (localStorage.getItem("sidebarColapsed") === "true") {
+        sidebar.classList.add("colapsed");
+      }
+
+      // Adicionar evento de clique para alternar o estado e salvar no localStorage
+      toggle.addEventListener("click", () => {
+        sidebar.classList.toggle("colapsed");
+
+        const isColapsed = sidebar.classList.contains("colapsed");
+        localStorage.setItem("sidebarColapsed", isColapsed);
+      });
+    });
+  </script>
 </head>
 <body>
-  <aside class="sidebar colapsed">
+  <aside class="sidebar ">
     <img src="{% static 'image/logo.svg' %}" alt="Logo">
     
     <nav>
@@ -52,6 +72,10 @@
       <i data-lucide="log-out"></i>
       <p>Sair</p>
     </a>
+
+    <div class="toggle-colapse" onclick="colapse()">
+      <i data-lucide="chevron-left"></i>
+    </div>
   </aside>
 
   <main class="main-container">
