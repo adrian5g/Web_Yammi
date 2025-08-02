@@ -10,7 +10,11 @@
 {% endblock %}
 
 {% block back_url %}
-{% url 'listar_pedidos' %}
+    {% if form.instance.pk %}
+        {% url 'detalhar_pedido' form.instance.pk %}
+    {% else %}
+        {% url 'listar_pedidos' %}
+    {% endif %}
 {% endblock %}
 
 {% block submit_text %}

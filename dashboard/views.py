@@ -124,7 +124,7 @@ def cadastrar_pedido(request):
     context = {
         'form': form
     }
-    
+
     return render(request, 'pedidos/form.html', context)
 
 
@@ -144,7 +144,7 @@ def editar_pedido(request, id):
     if form.is_valid():
         form.save()
         messages.success(request, 'Pedido atualizado com sucesso!')
-        return redirect('listar_pedidos')
+        return redirect('detalhar_pedido', pedido_id=pedido.id)
 
     context = {
         'form': form
@@ -166,6 +166,113 @@ def remover_pedido(request, id):
     pedido.delete()
 
     return redirect('listar_pedidos')
+
+
+# CRUD
+# PEDIDO ITENS
+
+
+@login_required
+def detalhar_pedido(request, pedido_id):
+    restaurante = get_object_or_404(Restaurante, user=request.user)
+    pedido = get_object_or_404(Pedido, pk=pedido_id)
+
+    if pedido.restaurante != restaurante:
+        messages.error(
+            request, 'Você não tem permissão para visualizar este pedido.')
+        return redirect('listar_pedidos')
+
+    itens_pedido = PedidoItem.objects.filter(pedido=pedido)
+
+    for item in itens_pedido:
+        item.valor_total = item.valor_unitario * item.quantidade
+
+    context = {
+        'pedido': pedido,
+        'itens_pedido': itens_pedido
+    }
+    return render(request, 'pedidos/detalhe.html', context)
+
+
+@login_required
+def cadastrar_pedido_item(request, pedido_id):
+    restaurante = get_object_or_404(Restaurante, user=request.user)
+    pedido = get_object_or_404(Pedido, pk=pedido_id)
+
+    if pedido.restaurante != restaurante:
+        messages.error(
+            request, 'Você não tem permissão para adicionar itens a este pedido.')
+        return redirect('listar_pedidos')
+
+    form = PedidoItemForm(request.POST or None)
+
+    form.fields['item_cardapio'].queryset = ItemCardapio.objects.filter(
+        restaurante=restaurante)
+
+    if form.is_valid():
+        pedido_item = form.save(commit=False)
+        pedido_item.pedido = pedido
+
+        pedido_item.valor_unitario = pedido_item.item_cardapio.valor
+        pedido_item.save()
+        messages.success(request, 'Item adicionado ao pedido com sucesso!')
+        return redirect('detalhar_pedido', pedido_id=pedido.id)
+
+    context = {
+        'form': form,
+        'pedido': pedido
+    }
+
+    return render(request, 'pedidos/item_form.html', context)
+
+
+@login_required
+def editar_pedido_item(request, pedido_id, item_id):
+    restaurante = get_object_or_404(Restaurante, user=request.user)
+    pedido = get_object_or_404(Pedido, pk=pedido_id)
+    pedido_item = get_object_or_404(PedidoItem, pk=item_id, pedido=pedido)
+
+    if pedido.restaurante != restaurante:
+        messages.error(
+            request, 'Você não tem permissão para editar este item de pedido.')
+        return redirect('listar_pedidos')
+
+    form = PedidoItemForm(request.POST or None, instance=pedido_item)
+
+    form.fields['item_cardapio'].queryset = ItemCardapio.objects.filter(
+        restaurante=restaurante)
+
+    if form.is_valid():
+        if pedido_item.item_cardapio != form.cleaned_data['item_cardapio']:
+            pedido_item.valor_unitario = form.cleaned_data['item_cardapio'].valor
+
+        form.save()
+        messages.success(request, 'Item do pedido atualizado com sucesso!')
+        return redirect('detalhar_pedido', pedido_id=pedido.id)
+
+    context = {
+        'form': form,
+        'pedido': pedido
+    }
+
+    return render(request, 'pedidos/item_form.html', context)
+
+
+@login_required
+def remover_pedido_item(request, pedido_id, item_id):
+    restaurante = get_object_or_404(Restaurante, user=request.user)
+    pedido = get_object_or_404(Pedido, pk=pedido_id)
+    pedido_item = get_object_or_404(PedidoItem, pk=item_id, pedido=pedido)
+
+    if pedido.restaurante != restaurante:
+        messages.error(
+            request, 'Você não tem permissão para remover este item de pedido.')
+        return redirect('listar_pedidos')
+
+    pedido_item.delete()
+    # messages.success(request, 'Item do pedido removido com sucesso!')
+    return redirect('detalhar_pedido', pedido_id=pedido.id)
+
 
 # CRUD
 # ITENS DO CARDAPIO
@@ -240,112 +347,3 @@ def remover_item_cardapio(request, id):
     item_cardapio.delete()
 
     return redirect('listar_itens_cardapio')
-
-
-# CRUD DE PEDIDOITEM
-
-
-@login_required
-def detalhar_pedido(request, pedido_id):
-    restaurante = get_object_or_404(Restaurante, user=request.user)
-    pedido = get_object_or_404(Pedido, pk=pedido_id)
-
-    if pedido.restaurante != restaurante:
-        messages.error(
-            request, 'Você não tem permissão para visualizar este pedido.')
-        return redirect('listar_pedidos')
-
-    itens_pedido = PedidoItem.objects.filter(pedido=pedido)
-
-    for item in itens_pedido:
-        item.valor_total = item.valor_unitario * item.quantidade
-
-    context = {
-        'pedido': pedido,
-        'itens_pedido': itens_pedido
-    }
-    return render(request, 'pedidos/detalhe.html', context)
-
-
-@login_required
-def cadastrar_pedido_item(request, pedido_id):
-    restaurante = get_object_or_404(Restaurante, user=request.user)
-    pedido = get_object_or_404(Pedido, pk=pedido_id)
-
-    if pedido.restaurante != restaurante:
-        messages.error(
-            request, 'Você não tem permissão para adicionar itens a este pedido.')
-        return redirect('listar_pedidos')
-
-    form = PedidoItemForm(request.POST or None)
-
-    form.fields['item_cardapio'].queryset = ItemCardapio.objects.filter(
-        restaurante=restaurante)
-
-    if form.is_valid():
-        pedido_item = form.save(commit=False)
-        pedido_item.pedido = pedido
-
-        pedido_item.valor_unitario = pedido_item.item_cardapio.valor
-        pedido_item.save()
-        messages.success(request, 'Item adicionado ao pedido com sucesso!')
-        return redirect('listar_pedidos')
-
-    context = {
-        'form': form,
-        'pedido': pedido
-    }
-
-    return render(request, 'pedidos/item_form.html', context)
-
-
-@login_required
-def editar_pedido_item(request, pedido_id, item_id):
-    restaurante = get_object_or_404(Restaurante, user=request.user)
-    pedido = get_object_or_404(Pedido, pk=pedido_id)
-    pedido_item = get_object_or_404(PedidoItem, pk=item_id, pedido=pedido)
-
-    if pedido.restaurante != restaurante:
-        messages.error(
-            request, 'Você não tem permissão para editar este item de pedido.')
-        return redirect('listar_pedidos')
-
-    form = PedidoItemForm(request.POST or None, instance=pedido_item)
-
-    form.fields['item_cardapio'].queryset = ItemCardapio.objects.filter(
-        restaurante=restaurante)
-
-    if form.is_valid():
-        if pedido_item.item_cardapio != form.cleaned_data['item_cardapio']:
-            pedido_item.valor_unitario = form.cleaned_data['item_cardapio'].valor
-
-        form.save()
-        messages.success(request, 'Item do pedido atualizado com sucesso!')
-        return redirect('detalhar_pedido', pedido_id=pedido.id)
-
-    context = {
-        'form': form,
-        'pedido': pedido
-    }
-    
-    return render(request, 'pedidos/item_form.html', context)
-
-
-@login_required
-def remover_pedido_item(request, pedido_id, item_id):
-    restaurante = get_object_or_404(Restaurante, user=request.user)
-    pedido = get_object_or_404(Pedido, pk=pedido_id)
-    pedido_item = get_object_or_404(PedidoItem, pk=item_id, pedido=pedido)
-
-    if pedido.restaurante != restaurante:
-        messages.error(
-            request, 'Você não tem permissão para remover este item de pedido.')
-        return redirect('listar_pedidos')
-
-    if request.method == 'POST':
-        pedido_item.delete()
-        messages.success(request, 'Item do pedido removido com sucesso!')
-        return redirect('detalhar_pedido', pedido_id=pedido.id)
-
-    messages.warning(request, 'Confirme a remoção do item do pedido.')
-    return redirect('detalhar_pedido', pedido_id=pedido.id)

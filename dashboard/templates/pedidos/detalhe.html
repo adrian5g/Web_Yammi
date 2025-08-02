@@ -1,33 +1,56 @@
-<div class="pedido-card">
-    <div class="pedido-header">
-        <h3>Pedido #{{ pedido.id }}</h3>
-        <p><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
-        <p><strong>Endereço:</strong> {{ pedido.cliente_endereco }}</p>
-        <p><strong>Telefone:</strong> {{ pedido.cliente_telefone }}</p>
-        <p><strong>Status:</strong> {{ pedido.get_status_display }}</p>
-    </div>
+{% extends 'page_normal_base.html' %}
 
-    <div class="pedido-itens">
-        {% for item in pedido.itens.all %}
-            <div class="pedido-item">
-                <div class="pedido-item-info">
-                    <img src="{{ item.imagem.url }}" alt="{{ item.nome }}">
-                    <div class="pedido-item-texto">
-                        <strong>{{ item.nome }}</strong>
-                        <span>{{ item.descricao }}</span>
-                    </div>
-                </div>
-                <span class="preco">R$ {{ item.valor }}</span>
-                <a href="{% url 'remover_item_cardapio' item.id %}">
-                    <i data-lucide="x"></i>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
+{% block page_title %}
+Detalhes Pedido #{{ pedido.id }}
+{% endblock %}
 
-    <div class="pedido-actions">
-        <a href="{% url 'editar_pedido' pedido.id %}" class="btn btn-edit">Editar</a>
-        <a href="{% url 'cadastrar_pedido_item' pedido.id %}" class="btn btn-edit">Adicionar</a>
-        <a href="{% url 'remover_pedido' pedido.id %}" class="btn btn-edit">Remover</a>
-    </div>
+{% block main_content %}
+<a href="{% url 'listar_pedidos' %}">
+  <i data-lucide="arrow-left"></i>
+</a>
+
+<div class="pedido-actions">
+  <a href="{% url 'editar_pedido' pedido.id %}" class="border-button" style="--button-color: var(--blue-1);">
+    <i data-lucide="square-pen"></i>
+    <p>Editar Pedido</p>
+  </a>
+
+  <a href="{% url 'cadastrar_pedido_item' pedido.id %}" class="border-button">
+    <i data-lucide="square-plus"></i>
+    <p>Adicionar item</p>
+  </a>
+
+  <a href="{% url 'remover_pedido' pedido.id %}" class="border-button" style="--button-color: var(--red-1);">
+    <i data-lucide="trash-2"></i>
+    <p>Excluir pedido</p>
+  </a>
 </div>
+
+<div class="pedido-container">
+  <header class="pedido-informations">
+    <h3>Pedido #{{ pedido.id }}</h3>
+    <p><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
+    <p><strong>Endereço:</strong> {{ pedido.cliente_endereco }}</p>
+    <p><strong>Telefone:</strong> {{ pedido.cliente_telefone }}</p>
+    <p><strong>Status:</strong> {{ pedido.get_status_display }}</p>
+  </header>
+
+  <main class="pedido-itens">
+    {% for item in itens_pedido %}
+        <div class="pedido-item">
+            <img src="{{ item.item_cardapio.imagem.url }}" alt="{{ item.item_cardapio.nome }}" />
+            
+            <div>
+              <p>{{ item.item_cardapio.nome }}</p>
+              <p>Quantidade: {{ item.quantidade }}</p>
+              <p>Valor Total: R$ {{ item.valor_total }}</p>
+            </div>
+            
+            <a href="{% url 'remover_pedido_item' pedido.id item.id %}">
+                <i data-lucide="x"></i>
+            </a>
+        </div>
+    {% endfor %}
+  </main>
+</div>
+{% endblock %}

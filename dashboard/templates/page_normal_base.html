@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+  <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}" type="image/x-icon">
+
+  <title>
+    {% block page_title %}
+    {% endblock %}
+  </title>
+
+  <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/shared.css' %}">
+  <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/page.css' %}">
+
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <!-- ESTILIZAÇÃO -->
+  <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/normal_page.css' %}">
+  <!-- ÍCONES -->
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</head>
+<body>
+  <div class="normal-container">
+    {% block main_content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
