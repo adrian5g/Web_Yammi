@@ -14,11 +14,9 @@
 
   <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}" type="image/x-icon">
 
-  <!-- ESTILIZAÇÃO -->
   <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/shared.css' %}">
   <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/form.css' %}">
 
-  <!-- ÍCONES -->
   <script defer src="https://unpkg.com/lucide@latest"></script>
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
@@ -82,6 +80,8 @@
         {% block submit_text %}{% endblock %}
       </button>
     </form>
+
+    {% block form_messages %}{% endblock %}
 
     <div class="option-text">
       {% block option_message %}{% endblock %}

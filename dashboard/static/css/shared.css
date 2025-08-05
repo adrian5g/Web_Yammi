@@ -68,3 +68,34 @@ textarea {
   border-radius: 10px;
   width: max-content;
 }
+
+/*Mensagens de erros */
+
+.messages {
+  list-style-type: none;
+  text-align: center; 
+  color: red; 
+  margin-top: 1rem;
+}
+
+.messages li {
+  font-weight: 500;
+}
+
+.form-group .form-input:invalid:not(:placeholder-shown) {
+  border: 1px solid var(--red-1);
+}
+
+.error-message {
+  color: var(--red-1); 
+  font-size: 0.8rem;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.non-field-error-message {
+  color: var(--red-1); 
+  text-align: center; 
+  margin-top: 5px; 
+  font-size: 0.8rem;
+}

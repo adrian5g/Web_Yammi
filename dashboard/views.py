@@ -50,7 +50,7 @@ def login_restaurante(request):
             login(request, user)
             return redirect('home_info')
         else:
-            messages.error(request, 'Usuário ou senha inválidos.')
+            messages.error(request, 'Dados de usuário ou senha inválidos.')
 
     return render(request, 'auth/form_login.html')
 
